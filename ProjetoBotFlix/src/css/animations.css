@@ -1,81 +1,88 @@
-/*animação*/
+/* === animação de fumaça === */
+
+
+
 .bg {
-    left: -50%;
-    right: -50%;
-    top: 0;
-    bottom: 0;
-    background-image: linear-gradient(-60deg, #510101 50%, #181717 50%);
-    position: fixed;
-    z-index: -1;
-    opacity: .7;
-    animation: slide 4s ease-in-out infinite alternate;
+  left: -50%;
+  right: -50%;
+  top: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: -1;
+  border-radius: 50% 40% 60% 50%;
+  filter: blur(80px);
+  opacity: 0;
+  animation:
+    driftSmoke 6s ease-in-out infinite alternate,
+    fadeSmoke  6s ease-in-out infinite alternate;
 }
 
+/* Camada 1 — brasa vermelha escura */
+.bg {
+  background: radial-gradient(
+    ellipse at 40% 60%,
+    #510505 2%,
+    #1a1a1a 45%,
+    transparent 75%
+  );
+}
+
+/* Camada 2 — fumaça cinza média */
 .bg2 {
-    animation-direction: alternate-reverse;
-    animation-duration: 5s;
+  background: radial-gradient(
+    ellipse at 60% 40%,
+    #2d2d2d 0%,
+    #111111 50%,
+    transparent 75%
+  );
+  animation-direction: alternate-reverse;
+  animation-duration: 8s;
 }
 
+/* Camada 3 — núcleo vermelho profundo */
 .bg3 {
-    animation-duration: 6s;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    #600000 0%,
+    #1f1f1f 40%,
+    transparent 70%
+  );
+  animation-duration: 10s;
+  border-radius: 60% 40% 50% 60%;
 }
 
-@keyframes slide {
-    0% {
-        transform: translateX(-20%);
-    }
-
-    100% {
-        transform: translateX(20%);
-    }
+@keyframes driftSmoke {
+  0%   { transform: translateX(-15%) translateY(5%)  scaleX(1.05); }
+  33%  { transform: translateX(5%)  translateY(-8%) scaleX(0.95); }
+  66%  { transform: translateX(18%) translateY(3%)  scaleX(1.08); }
+  100% { transform: translateX(-10%) translateY(-5%) scaleX(1); }
 }
 
-/*fim animação fundo*/
+@keyframes fadeSmoke {
+  0%   { opacity: 0.55; }
+  30%  { opacity: 0.75; }
+  60%  { opacity: 0.45; }
+  100% { opacity: 0.65; }
+}
 
-/*TODO : daria pra tirar essa pra facilitar */
-/* Animação robo */
+/* ===  animações de elemento === */
+
 @keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scaleIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  0%   { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-20px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-20px); }
 }
 
 @keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.5;
-  }
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
 }
